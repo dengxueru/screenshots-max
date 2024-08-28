@@ -1,7 +1,7 @@
 {
-  "name": "electron-screenshots-fix",
+  "name": "electron-screenshots-max",
   "version": "0.5.7",
-  "description": "electron 截图插件 fix",
+  "description": "electron 截图插件 max",
   "types": "lib/screenshots.d.ts",
   "main": "lib/screenshots.js",
   "files": [
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/w3cways/screenshots-plus.git"
+    "url": "git+https://github.com/dengxueru/screenshots-max.git"
   },
   "keywords": [
     "electron",
@@ -26,9 +26,9 @@
     "capture",
     "cropper"
   ],
-  "author": "w3cways",
+  "author": "dengxueru",
   "license": "MIT",
-  "homepage": "https://github.com/w3cways/screenshots-plus/tree/master/packages/electron-screenshots#readme",
+  "homepage": "https://github.com/dengxueru/screenshots-max/blob/master/packages/electron-screenshots/README.md",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

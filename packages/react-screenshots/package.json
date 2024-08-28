@@ -1,5 +1,5 @@
 {
-  "name": "react-screenshots",
+  "name": "react-screenshots-max",
   "version": "0.5.1",
   "description": "a screenshot cropper tool by react",
   "main": "./lib/react-screenshots.cjs.js",
@@ -22,19 +22,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nashaofu/screenshots.git"
+    "url": "git+https://github.com/dengxueru/screenshots-max.git"
   },
   "keywords": [
     "screenshot",
     "cropper",
     "react"
   ],
-  "author": "nashaofu",
+  "author": "dengxueru",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/nashaofu/screenshots/issues"
   },
-  "homepage": "https://github.com/nashaofu/screenshots/tree/master/packages/react-screenshots#readme",
+  "homepage": "https://github.com/dengxueru/screenshots-max/blob/master/packages/react-screenshots/README.md",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
