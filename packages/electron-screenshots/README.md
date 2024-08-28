@@ -1,6 +1,15 @@
-# electron-screenshots
+# electron-screenshots-plus
 
-> electron 截图插件
+> electron 截图插件 基于 electron-screenshots 二次开发
+> 加快了截图速度，窗口性能做了优化
+
+截图默认快捷键改成了 "ctrl + shift + m"
+
+## Install
+
+`npm i electron-screenshots-plus`
+
+--------------------------------分隔线（下面是原插件说明, 使用的时候把 electron-screenshots 替换成 electron-screenshots-plus）--------------------------------
 
 ## Prerequisites
 
@@ -41,11 +50,6 @@ app.whenReady().then(() => {
   screenshots.on("save", (e, buffer, bounds) => {
     console.log("capture", buffer, bounds);
   });
-  // 保存后的回调事件
-  screenshots.on("afterSave", (e, buffer, bounds, isSaved) => {
-    console.log("capture", buffer, bounds);
-    console.log("isSaved", isSaved) // 是否保存成功
-  });
   debug({ showDevTools: true, devToolsMode: "undocked" });
 });
 
@@ -63,7 +67,7 @@ app.on("window-all-closed", () => {
 ```js
 {
   externals: {
-    'electron-screenshots': 'require("electron-screenshots")'
+    'electron-screenshots-plus': 'require("electron-screenshots-plus")'
   }
 }
 ```
@@ -77,7 +81,7 @@ module.exports = {
   pluginOptions: {
     electronBuilder: {
       // 不打包，使用 require 加载
-      externals: ["electron-screenshots"],
+      externals: ["electron-screenshots-plus"],
     },
   },
 };
@@ -106,7 +110,7 @@ const screenshots = new Screenshots({
 
 ## Methods
 
-- `Debugger`类型产考[debug](https://github.com/debug-js/debug)中的`Debugger`类型
+- `Debugger`类型产考`debug`中的`Debugger`类型
 
 ```ts
 export type LoggerFn = (...args: unknown[]) => void;
@@ -180,14 +184,11 @@ class Event {
 }
 ```
 
-| 名称          | 说明                                                        | 回调参数                                                                          |
-| ------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| ok            | 截图确认事件                                                | `(event: Event, buffer: Buffer, data: ScreenshotsData) => void`                   |
-| cancel        | 截图取消事件                                                | `(event: Event) => void`                                                          |
-| save          | 截图保存事件                                                | `(event: Event, buffer: Buffer, data: ScreenshotsData) => void`                   |
-| afterSave     | 截图保存（取消保存）后的事件                                | `(event: Event, buffer: Buffer, data: ScreenshotsData, isSaved: boolean) => void` |
-| windowCreated | 截图窗口被创建后触发                                        | `($win: BrowserWindow) => void`                                                   |
-| windowClosed  | 截图窗口被关闭后触发，对`BrowserWindow` `closed` 事件的转发 | `($win: BrowserWindow) => void`                                                   |
+| 名称   | 说明         | 回调参数                                                        |
+| ------ | ------------ | --------------------------------------------------------------- |
+| ok     | 截图确认事件 | `(event: Event, buffer: Buffer, data: ScreenshotsData) => void` |
+| cancel | 截图取消事件 | `(event: Event) => void`                                        |
+| save   | 截图保存事件 | `(event: Event, buffer: Buffer, data: ScreenshotsData) => void` |
 
 ### 说明
 

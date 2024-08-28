@@ -43,6 +43,10 @@ export default function App (): JSX.Element {
     [display]
   )
 
+  const onClear = useCallback(() => {
+    window.screenshots.clear()
+  }, [])
+
   useEffect(() => {
     const onSetLang = (lang: Lang) => {
       setLang(lang)
@@ -94,6 +98,7 @@ export default function App (): JSX.Element {
         onSave={onSave}
         onCancel={onCancel}
         onOk={onOk}
+        onClear={onClear}
       />
     </div>
   )

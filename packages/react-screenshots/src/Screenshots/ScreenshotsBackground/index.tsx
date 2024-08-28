@@ -1,14 +1,16 @@
-import React, { memo, ReactElement, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { ReactElement, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import useBounds from '../hooks/useBounds'
 import useStore from '../hooks/useStore'
 import ScreenshotsMagnifier from '../ScreenshotsMagnifier'
 import { Point, Position } from '../types'
 import getBoundsByPoints from './getBoundsByPoints'
+import useCall from '../hooks/useCall'
 import './index.less'
 
-export default memo(function ScreenshotsBackground (): ReactElement | null {
+export default function ScreenshotsBackground (): ReactElement | null {
   const { url, image, width, height } = useStore()
   const [bounds, boundsDispatcher] = useBounds()
+  const call = useCall()
 
   const elRef = useRef<HTMLDivElement>(null)
   const pointRef = useRef<Point | null>(null)
@@ -48,6 +50,7 @@ export default memo(function ScreenshotsBackground (): ReactElement | null {
       if (pointRef.current || bounds || e.button !== 0) {
         return
       }
+      call('onClear')
       pointRef.current = {
         x: e.clientX,
         y: e.clientY
@@ -123,4 +126,4 @@ export default memo(function ScreenshotsBackground (): ReactElement | null {
       {position && !bounds && <ScreenshotsMagnifier x={position?.x} y={position?.y} />}
     </div>
   )
-})
+}

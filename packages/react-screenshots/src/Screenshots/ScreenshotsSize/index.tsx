@@ -1,4 +1,4 @@
-import React, { memo, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import './index.less'
 
 export interface SizeProps {
@@ -6,7 +6,7 @@ export interface SizeProps {
   onChange: (value: number) => void
 }
 
-export default memo(function ScreenshotsSize ({ value, onChange }: SizeProps): ReactElement {
+export default function ScreenshotsSize ({ value, onChange }: SizeProps): ReactElement {
   const sizes = [3, 6, 9]
   return (
     <div className='screenshots-size'>
@@ -31,4 +31,4 @@ export default memo(function ScreenshotsSize ({ value, onChange }: SizeProps): R
       })}
     </div>
   )
-})
+}

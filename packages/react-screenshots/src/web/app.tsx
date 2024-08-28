@@ -2,27 +2,19 @@ import React, { ReactElement, useCallback } from 'react'
 import Screenshots from '../Screenshots'
 import { Bounds } from '../Screenshots/types'
 import './app.less'
-import imageUrl from './image.jpg'
+import imageUrl from './image.png'
 
 export default function App (): ReactElement {
   const onSave = useCallback((blob: Blob | null, bounds: Bounds) => {
     console.log('save', blob, bounds)
-    if (blob) {
-      const url = URL.createObjectURL(blob)
-      console.log(url)
-      window.open(url)
-    }
+    console.log(blob && URL.createObjectURL(blob))
   }, [])
   const onCancel = useCallback(() => {
     console.log('cancel')
   }, [])
   const onOk = useCallback((blob: Blob | null, bounds: Bounds) => {
-    console.log('ok', blob, bounds)
-    if (blob) {
-      const url = URL.createObjectURL(blob)
-      console.log(url)
-      window.open(url)
-    }
+    console.log('okzz', blob, bounds)
+    console.log(blob && URL.createObjectURL(blob))
   }, [])
 
   return (

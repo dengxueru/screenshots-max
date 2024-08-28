@@ -89,8 +89,8 @@ export default function Brush (): ReactElement {
         name: 'Brush',
         type: HistoryItemType.Source,
         data: {
-          size,
-          color,
+          size: size,
+          color: color,
           points: [
             {
               x: e.clientX - left,

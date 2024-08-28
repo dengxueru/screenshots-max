@@ -1,23 +1,17 @@
-import React, {
-  memo,
-  ReactElement,
-  PointerEvent,
-  ReactNode,
-  useCallback
-} from 'react'
+import React, { ReactElement, ReactNode, useCallback } from 'react'
 import ScreenshotsOption from '../ScreenshotsOption'
 import './index.less'
 
 export interface ScreenshotsButtonProps {
-  title: string;
-  icon: string;
-  checked?: boolean;
-  disabled?: boolean;
-  option?: ReactNode;
-  onClick?: (e: PointerEvent<HTMLDivElement>) => unknown;
+  title: string
+  icon: string
+  checked?: boolean
+  disabled?: boolean
+  option?: ReactNode
+  onClick?: (e: PointerEvent) => unknown
 }
 
-export default memo(function ScreenshotsButton ({
+export default function ScreenshotsButton ({
   title,
   icon,
   checked,
@@ -28,7 +22,7 @@ export default memo(function ScreenshotsButton ({
   const classNames = ['screenshots-button']
 
   const onButtonClick = useCallback(
-    (e: PointerEvent<HTMLDivElement>) => {
+    e => {
       if (disabled || !onClick) {
         return
       }
@@ -46,13 +40,9 @@ export default memo(function ScreenshotsButton ({
 
   return (
     <ScreenshotsOption open={checked} content={option}>
-      <div
-        className={classNames.join(' ')}
-        title={title}
-        onClick={onButtonClick}
-      >
+      <div className={classNames.join(' ')} title={title} onClick={onButtonClick}>
         <span className={icon} />
       </div>
     </ScreenshotsOption>
   )
-})
+}

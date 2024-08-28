@@ -11,6 +11,7 @@ interface ScreenshotsData {
 interface GlobalScreenshots {
   ready: () => void
   reset: () => void
+  clear: () => void
   save: (arrayBuffer: ArrayBuffer, data: ScreenshotsData) => void
   cancel: () => void
   ok: (arrayBuffer: ArrayBuffer, data: ScreenshotsData) => void

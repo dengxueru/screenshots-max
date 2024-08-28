@@ -1,7 +1,7 @@
-import React, { cloneElement, memo, ReactElement, ReactNode, useContext, useEffect, useRef, useState } from 'react'
+import React, { cloneElement, ReactElement, ReactNode, useContext, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { ScreenshotsOperationsCtx } from '../ScreenshotsOperations'
 import { Point } from '../types'
+import { ScreenshotsOperationsCtx } from '../ScreenshotsOperations'
 import './index.less'
 
 export interface ScreenshotsOptionProps {
@@ -17,7 +17,7 @@ export enum Placement {
   Top = 'top'
 }
 
-export default memo(function ScreenshotsOption ({ open, content, children }: ScreenshotsOptionProps): ReactElement {
+export default function ScreenshotsOption ({ open, content, children }: ScreenshotsOptionProps): ReactElement {
   const childrenRef = useRef<HTMLDivElement>(null)
   const popoverRef = useRef<HTMLDivElement | null>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -113,7 +113,8 @@ export default memo(function ScreenshotsOption ({ open, content, children }: Scr
             className='screenshots-option'
             style={{
               visibility: position ? 'visible' : 'hidden',
-              transform: `translate(${position?.x ?? 0}px, ${position?.y ?? 0}px)`
+              left: position?.x,
+              top: position?.y
             }}
             data-placement={placement}
           >
@@ -124,4 +125,4 @@ export default memo(function ScreenshotsOption ({ open, content, children }: Scr
         )}
     </>
   )
-})
+}

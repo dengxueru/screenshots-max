@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef, FocusEvent, useLayoutEffect, useState, memo } from 'react'
+import React, { ReactElement, useRef, FocusEvent, useLayoutEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import calculateNodeSize from './calculateNodeSize'
 import './index.less'
@@ -15,7 +15,7 @@ export interface TextInputProps {
   onBlur: (e: FocusEvent<HTMLTextAreaElement>) => unknown
 }
 
-export default memo(function ScreenshotsTextarea ({
+export default function ScreenshotsTextarea ({
   x,
   y,
   maxWidth,
@@ -66,14 +66,15 @@ export default memo(function ScreenshotsTextarea ({
       ref={textareaRef}
       className='screenshots-textarea'
       style={{
+        left: x,
+        top: y,
         color,
         width,
         height,
         maxWidth,
         maxHeight,
         fontSize: size,
-        lineHeight: `${size}px`,
-        transform: `translate(${x}px, ${y}px)`
+        lineHeight: `${size}px`
       }}
       value={value}
       onChange={e => onChange && onChange(e.target.value)}
@@ -81,4 +82,4 @@ export default memo(function ScreenshotsTextarea ({
     />,
     getPopoverEl()
   )
-})
+}

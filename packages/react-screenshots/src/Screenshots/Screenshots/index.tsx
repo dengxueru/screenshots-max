@@ -1,14 +1,13 @@
-import React, { MouseEvent, ReactElement, useCallback, useLayoutEffect, useRef, useState } from 'react'
-import './icons/iconfont.less'
-import imageToBlob from './imageToBlob'
+import React, { MouseEvent, ReactElement, useCallback, useRef, useState } from 'react'
+import ScreenshotsContext from '../ScreenshotsContext'
+import ScreenshotsBackground from '../ScreenshotsBackground'
+import ScreenshotsCanvas from '../ScreenshotsCanvas'
+import ScreenshotsOperations from '../ScreenshotsOperations'
+import { Bounds, Emiter, History } from '../types'
+import useGetLoadedImage from '../useGetLoadedImage'
+import zhCN, { Lang } from '../zh_CN'
+import '../icons/iconfont.less'
 import './screenshots.less'
-import ScreenshotsBackground from './ScreenshotsBackground'
-import ScreenshotsCanvas from './ScreenshotsCanvas'
-import ScreenshotsContext from './ScreenshotsContext'
-import ScreenshotsOperations from './ScreenshotsOperations'
-import { Bounds, Emiter, History } from './types'
-import useGetLoadedImage from './useGetLoadedImage'
-import zhCN, { Lang } from './zh_CN'
 
 export interface ScreenshotsProps {
   url?: string
@@ -84,27 +83,16 @@ export default function Screenshots ({ url, width, height, lang, className, ...p
   }
 
   const onDoubleClick = useCallback(
-    async (e: MouseEvent) => {
-      if (e.button !== 0 || !image) {
+    (e: MouseEvent) => {
+      if (e.button !== 0 || !bounds || !canvasContextRef.current) {
         return
       }
-      if (bounds && canvasContextRef.current) {
-        canvasContextRef.current.canvas.toBlob(blob => {
-          call('onOk', blob, bounds)
-          reset()
-        }, 'image/png')
-      } else {
-        const blob = await imageToBlob(image, { width, height })
-        call('onOk', blob, {
-          x: 0,
-          y: 0,
-          width,
-          height
-        })
+      canvasContextRef.current.canvas.toBlob(blob => {
+        call('onOk', blob, bounds)
         reset()
-      }
+      }, 'image/png')
     },
-    [image, bounds, width, height, call]
+    [bounds, call]
   )
 
   const onContextMenu = useCallback(
@@ -118,11 +106,6 @@ export default function Screenshots ({ url, width, height, lang, className, ...p
     },
     [call]
   )
-
-  // url变化，重置截图区域
-  useLayoutEffect(() => {
-    reset()
-  }, [url])
 
   return (
     <ScreenshotsContext.Provider value={{ store, dispatcher }}>

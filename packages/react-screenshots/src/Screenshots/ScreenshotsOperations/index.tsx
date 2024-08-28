@@ -1,13 +1,13 @@
-import React, { memo, MouseEvent, ReactElement, useCallback, useEffect, useRef, useState } from 'react'
+import React, { MouseEvent, ReactElement, useCallback, useEffect, useRef, useState } from 'react'
 import useBounds from '../hooks/useBounds'
-import useStore from '../hooks/useStore'
 import OperationButtons from '../operations'
-import { Bounds, Position } from '../types'
 import './index.less'
+import useStore from '../hooks/useStore'
+import { Bounds, Position } from '../types'
 
 export const ScreenshotsOperationsCtx = React.createContext<Bounds | null>(null)
 
-export default memo(function ScreenshotsOperations (): ReactElement | null {
+export default function ScreenshotsOperations (): ReactElement | null {
   const { width, height } = useStore()
   const [bounds] = useBounds()
   const [operationsRect, setOperationsRect] = useState<Bounds | null>(null)
@@ -46,21 +46,18 @@ export default memo(function ScreenshotsOperations (): ReactElement | null {
       y = height - elRect.height - 10
     }
 
-    // 小数存在精度问题
-    if (!position || Math.abs(position.x - x) > 1 || Math.abs(position.y - y) > 1) {
+    if (position?.x !== x || position.y !== y) {
       setPosition({
         x,
         y
       })
     }
 
-    // 小数存在精度问题
     if (
-      !operationsRect ||
-      Math.abs(operationsRect.x - elRect.x) > 1 ||
-      Math.abs(operationsRect.y - elRect.y) > 1 ||
-      Math.abs(operationsRect.width - elRect.width) > 1 ||
-      Math.abs(operationsRect.height - elRect.height) > 1
+      operationsRect?.x !== elRect.x ||
+      operationsRect.y !== elRect.y ||
+      operationsRect.width !== elRect.width ||
+      operationsRect.height !== elRect.height
     ) {
       setOperationsRect({
         x: elRect.x,
@@ -82,7 +79,8 @@ export default memo(function ScreenshotsOperations (): ReactElement | null {
         className='screenshots-operations'
         style={{
           visibility: position ? 'visible' : 'hidden',
-          transform: `translate(${position?.x ?? 0}px, ${position?.y ?? 0}px)`
+          left: position?.x,
+          top: position?.y
         }}
         onDoubleClick={onDoubleClick}
         onContextMenu={onContextMenu}
@@ -99,4 +97,4 @@ export default memo(function ScreenshotsOperations (): ReactElement | null {
       </div>
     </ScreenshotsOperationsCtx.Provider>
   )
-})
+}
