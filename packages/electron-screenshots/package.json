@@ -1,6 +1,6 @@
 {
   "name": "electron-screenshots-max",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "description": "electron 截图插件 max",
   "types": "lib/screenshots.d.ts",
   "main": "lib/screenshots.js",
@@ -36,7 +36,7 @@
     "debug": "^4.3.3",
     "fs-extra": "^10.1.0",
     "node-screenshots": "^0.0.6",
-    "react-screenshots": "^0.5.1"
+    "react-screenshots-max": "^0.5.1"
   },
   "peerDependencies": {
     "electron": ">=11"

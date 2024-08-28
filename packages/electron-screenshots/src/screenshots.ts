@@ -262,7 +262,7 @@ export default class Screenshots extends Events {
     // win.webContents.openDevTools()
     win.name = 'screenshots'
     win.loadURL(
-      `file://${require.resolve('react-screenshots/electron/electron.html')}`
+      `file://${require.resolve('react-screenshots-max/electron/electron.html')}`
     )
 
     win.on('enter-full-screen', () => {
