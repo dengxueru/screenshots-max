@@ -287,8 +287,8 @@ export default class Screenshots extends Events {
     // this.$win.setFullScreen(isMac)
     // this.$win.setSimpleFullScreen(isMac)
     const { width, scaleFactor, height } = display // 截图的时候按照DPI截图，这里要按照DPI还原成原始大小
-    display.width = width
-    display.height = height
+    display.width = width / scaleFactor
+    display.height = height / scaleFactor
     this.$win.setBounds(display, false)
     // this.$view.setBounds({
     //   x: 0,

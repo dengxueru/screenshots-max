@@ -11,9 +11,9 @@ export default (): Display => {
   return {
     id,
     scaleFactor,
-    x: bounds.x,
-    y: bounds.y,
-    width: bounds.width,
-    height: bounds.height
+    x: Math.floor(bounds.x * scaleFactor),
+    y: Math.floor(bounds.y * scaleFactor),
+    width: Math.floor(bounds.width * scaleFactor),
+    height: Math.floor(bounds.height * scaleFactor)
   }
 }
