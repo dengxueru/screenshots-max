@@ -36,7 +36,7 @@
     "debug": "^4.3.3",
     "fs-extra": "^10.1.0",
     "node-screenshots": "^0.0.6",
-    "react-screenshots-max": "^0.5.1"
+    "react-screenshots-max": "^0.5.2"
   },
   "peerDependencies": {
     "electron": ">=11"
