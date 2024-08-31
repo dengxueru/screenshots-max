@@ -84,6 +84,8 @@ export default class Screenshots extends Events {
 
   private singleWindow: boolean
 
+  private delayTimer: ReturnType<typeof setTimeout> | null = null
+
   private isReady = new Promise<void>((resolve) => {
     ipcMain.once('SCREENSHOTS:ready', () => {
       resolve()
@@ -104,6 +106,10 @@ export default class Screenshots extends Events {
   }
 
   interval () {
+    if (this.delayTimer) {
+      clearTimeout(this.delayTimer)
+      this.delayTimer = null
+    }
     this.timer = setInterval(this.updateBounds.bind(this), 60)
   }
 
@@ -122,6 +128,9 @@ export default class Screenshots extends Events {
     if (this.imageUrl || !this.$win) {
       // 已经在截图界面了，不再唤起截图，参考企业微信
       return
+    }
+    if (this.$win) {
+      this.$win.show()
     }
     this.interval()
     const display = getDisplay()
@@ -146,7 +155,11 @@ export default class Screenshots extends Events {
     this.$win.setResizable(true)
     this.$win.setAlwaysOnTop(false)
 
-    // this.$win.hide()
+    this.delayTimer = setTimeout(() => {
+      if (this.$win) {
+        this.$win.hide()
+      }
+    }, 100)
 
     if (isMac) {
       // mac下需要先hide，加快关闭截图速度，
@@ -233,7 +246,7 @@ export default class Screenshots extends Events {
       height: 0,
       useContentSize: true,
       frame: false,
-      show: true,
+      show: false,
       autoHideMenuBar: true,
       transparent: true,
       // resizable 设置为 false 会导致页面崩溃
